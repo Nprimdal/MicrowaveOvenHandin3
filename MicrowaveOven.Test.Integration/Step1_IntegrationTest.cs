@@ -28,10 +28,11 @@ namespace MicrowaveOven.Test.Integration
         {
             light.TurnOn();
 
-            StreamWriter sw = new StreamWriter(Console.OpenStandardOutput()) {AutoFlush = true};
-            Console.SetOut(sw);
-            string expected = "Light is turned on";
-            Assert.AreEqual(expected, sw.ToString());
+            StringWriter stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+
+            Assert.That(stringWriter.ToString(), Is.EqualTo("Light is turned on"));
+            //Arg.Is<string>(s => s.ToLower().Contains("on")
         }
     }
 }
