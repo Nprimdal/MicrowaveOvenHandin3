@@ -1,9 +1,12 @@
 using System;
 using System.IO;
+using Castle.Core.Internal;
+using Microsoft.VisualStudio.TestPlatform.Utilities;
 using Microwave.Classes.Boundary;
 using Microwave.Classes.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
+using IOutput = Microwave.Classes.Interfaces.IOutput;
 
 namespace MicrowaveOven.Test.Integration
 {
@@ -24,15 +27,55 @@ namespace MicrowaveOven.Test.Integration
         }
 
         [Test]
-        public void Test1()
+        public void TurnOn_WasOff_ExpectedOutputInConsole_LightIsTurnedOn()
         {
-            light.TurnOn();
-
             StringWriter stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
 
-            Assert.That(stringWriter.ToString(), Is.EqualTo("Light is turned on"));
-            //Arg.Is<string>(s => s.ToLower().Contains("on")
+            light.TurnOn();
+
+            string expected = "Light is turned on\r\n"; //Arg.Is<string>(s => s.ToLower().Contains("on"));
+
+            Assert.That(stringWriter.ToString().Contains("on"));
+
+        }
+        [Test]
+        public void TurnOff_WasOn_ExpectedOutputInConsole_LightIsTurnedOff()
+        {
+            StringWriter stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+            
+            light.TurnOn();
+            light.TurnOff();
+
+            string expected = "Light is turned on\r\n"; //Arg.Is<string>(s => s.ToLower().Contains("on"));
+
+            Assert.That(stringWriter.ToString().Contains("off"));
+        }
+        [Test]
+        public void TurnOn_WasOn_ExpectedOutputInConsole_LightIsTurnedOn()
+        {
+            StringWriter stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+
+            light.TurnOn();
+            light.TurnOn();
+
+            string expected = "Light is turned on\r\n"; //Arg.Is<string>(s => s.ToLower().Contains("on"));
+
+            Assert.That(stringWriter.ToString().Contains("on"));
+        }
+        [Test]
+        public void TurnOff_WasOff_ExpectedNoOutputInConsole()
+        {
+            StringWriter stringWriter = new StringWriter();
+            Console.SetOut(stringWriter); 
+            ;
+            light.TurnOff();
+
+            string expected = "Light is turned on\r\n"; //Arg.Is<string>(s => s.ToLower().Contains("on"));
+
+            Assert.That(stringWriter.ToString().IsNullOrEmpty());
         }
     }
 }
