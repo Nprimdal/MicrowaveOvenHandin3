@@ -36,7 +36,7 @@ namespace MicrowaveOven.Test.Integration
 
             string expected = "Light is turned on\r\n"; //Arg.Is<string>(s => s.ToLower().Contains("on"));
 
-            Assert.That(stringWriter.ToString().Contains("on"));
+            Assert.That(stringWriter.ToString().ToLower().Contains("on") && stringWriter.ToString().ToLower().Contains("light"));
 
         }
         [Test]
