@@ -34,7 +34,6 @@ namespace MicrowaveOven.Test.Integration
 
             light.TurnOn();
 
-            string expected = "Light is turned on\r\n"; //Arg.Is<string>(s => s.ToLower().Contains("on"));
 
             Assert.That(stringWriter.ToString().ToLower().Contains("on") && stringWriter.ToString().ToLower().Contains("light"));
 
@@ -48,9 +47,7 @@ namespace MicrowaveOven.Test.Integration
             light.TurnOn();
             light.TurnOff();
 
-            string expected = "Light is turned on\r\n"; //Arg.Is<string>(s => s.ToLower().Contains("on"));
-
-            Assert.That(stringWriter.ToString().Contains("off"));
+            Assert.That(stringWriter.ToString().ToLower().Contains("off") && stringWriter.ToString().ToLower().Contains("light"));
         }
         [Test]
         public void TurnOn_WasOn_ExpectedOutputInConsole_LightIsTurnedOn()
@@ -61,19 +58,15 @@ namespace MicrowaveOven.Test.Integration
             light.TurnOn();
             light.TurnOn();
 
-            string expected = "Light is turned on\r\n"; //Arg.Is<string>(s => s.ToLower().Contains("on"));
-
-            Assert.That(stringWriter.ToString().Contains("on"));
+            Assert.That(stringWriter.ToString().ToLower().Contains("on") && stringWriter.ToString().ToLower().Contains("light"));
         }
         [Test]
         public void TurnOff_WasOff_ExpectedNoOutputInConsole()
         {
             StringWriter stringWriter = new StringWriter();
-            Console.SetOut(stringWriter); 
-            ;
-            light.TurnOff();
+            Console.SetOut(stringWriter);
 
-            string expected = "Light is turned on\r\n"; //Arg.Is<string>(s => s.ToLower().Contains("on"));
+            light.TurnOff();
 
             Assert.That(stringWriter.ToString().IsNullOrEmpty());
         }
