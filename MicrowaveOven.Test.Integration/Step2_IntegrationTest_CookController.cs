@@ -6,6 +6,7 @@ using Microwave.Classes.Boundary;
 using Microwave.Classes.Controllers;
 using Microwave.Classes.Interfaces;
 using NSubstitute;
+using NSubstitute.ExceptionExtensions;
 using NUnit.Framework;
 
 namespace MicrowaveOven.Test.Integration
@@ -35,14 +36,14 @@ namespace MicrowaveOven.Test.Integration
         [TestCase(100)]
         [TestCase(595)]
         [TestCase(700)]
-        public void StartCooking_ValidParameters_PowerTubeStarted(int power)
+        public void StartCooking_PowerInRange_PowerTubeStarted(int power)
         {
             StringWriter stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
-            cookController.StartCooking(power, 60);
+            cookController.StartCooking(power, 150);
 
             Assert.That(stringWriter.ToString().ToLower().Contains($"{power}"));
-            Assert.That(stringWriter.ToString().ToLower(), Is.EqualTo());
+
         }
     }
 }
