@@ -10,20 +10,28 @@ using IOutput = Microwave.Classes.Interfaces.IOutput;
 
 namespace MicrowaveOven.Test.Integration
 {
-    public class Step1_IntegrationTest
+    public class Step1_IntegrationTest_Light
     {
         private IOutput output;
         private ILight light;
-        private IPowerTube powerTube;
-        private IDisplay display;
+        
 
         [SetUp]
         public void Setup()
         {
             output = new Output();
             light = new Light(output);
-            powerTube = new PowerTube(output);
-            display = new Display(output);
+            
+        }
+
+        [Test]
+        public void NoCall_WasOff_ExpectedOutputInConsole_StringEmpty()
+        {
+            StringWriter stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+
+            Assert.That(stringWriter.ToString().IsNullOrEmpty());
+
         }
 
         [Test]
