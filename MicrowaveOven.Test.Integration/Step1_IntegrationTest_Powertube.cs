@@ -52,23 +52,7 @@ namespace MicrowaveOven.Test.Integration
             Assert.That(stringWriter.ToString().ToLower().Contains($"{power}"));
         }
 
-        [TestCase(49)]
-        [TestCase(-1)]
-        [TestCase(-10)]
-        [TestCase(701)]
-        [TestCase(800)]
-        public void TurnOn_WasOff_ExpectedOutputInConsole_ArgumentOutOfRangeException(int power)
-        {
-            StringWriter stringWriter = new StringWriter();
-            Console.SetOut(stringWriter);
-
-            powerTube.TurnOn(power);
-            
-            string output = stringWriter.Throws<ArgumentOutOfRangeException>().ToString();
-            //Assert.That(stringWriter.ToString().ToLower().Contains($"{output}"));
-            //Assert.Throws<ArgumentOutOfRangeException> () => stringWriter.ToString().ToLower().Contains("must");
-
-        }
+        
 
         [Test]
         public void TurnOff_WasOn_ExpectedOutputInConsole_Off()
