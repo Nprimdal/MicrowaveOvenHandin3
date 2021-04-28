@@ -42,7 +42,6 @@ namespace MicrowaveOven.Test.Integration
             cookController.StartCooking(power, 60);
 
             Assert.That(stringWriter.ToString().ToLower().Contains($"{power}"));
-            Assert.That(stringWriter.ToString().ToLower(), Is.EqualTo());
         }
     }
 }
