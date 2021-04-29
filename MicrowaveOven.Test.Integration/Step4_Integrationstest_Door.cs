@@ -38,60 +38,6 @@ namespace MicrowaveOven.Test.Integration
         }
 
         [Test]
-        public void PowerButtonNotPressed_ExpectedResultNoCall()
-        {
-            display.DidNotReceive().ShowPower(50);
-
-        }
-
-        [Test]
-        public void PowerButtonPressed_ExpectedResult_default()
-        {
-            powerButton.Press();
-            display.Received(1).ShowPower(Arg.Is<int>(50));
-
-        }
-
-        [Test]
-        public void PowerButtonPressed_3Times_ExpectedResult_PowerIs150()
-        {
-            powerButton.Press();
-            powerButton.Press();
-            powerButton.Press();
-            display.Received(1).ShowPower(Arg.Is<int>(150));
-        }
-
-        [Test]
-        public void PowerButtonPressed_14Times_PowerIs700()
-        {
-            for (int i = 1; i <= 14; i++)
-            {
-                powerButton.Press();
-            }
-            display.Received(1).ShowPower(Arg.Is<int>(700));
-        }
-
-
-        [Test]
-        public void PowerButtonPressed_16Times_PowerIs100()
-        {
-            for (int i = 1; i <= 16; i++)
-            {
-                powerButton.Press();
-            }
-            display.Received(2).ShowPower(Arg.Is<int>(100));
-        }
-
-        [Test]
-        public void StartCancelButtonPressed_StateSetPower_ExpectedResultDisplayCleared()
-        {
-            powerButton.Press();
-            startCancelButton.Press();
-
-            display.Received(1).Clear();
-        }
-
-        [Test]
         public void DoorOpened_StateSetPower_ExpectedResultDisplayCleared()
         {
             powerButton.Press();
