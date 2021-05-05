@@ -78,5 +78,15 @@ namespace MicrowaveOven.Test.Integration
             Assert.That(stringWriter.ToString().IsNullOrEmpty());
 
         }
+
+        
+
+
+
+
+
+
+
+
     }
 }
