@@ -45,5 +45,103 @@ namespace MicrowaveOven.Test.Integration
 
             display.Received(1).Clear();
         }
+
+        [Test]
+        public void DoorOpened_StateSetPower_ExpectedResultLightTurnOn()
+        {
+            powerButton.Press();
+            door.Open();
+
+            light.Received(1).TurnOn();
+        }
+
+        [Test]
+        public void DoorOpened_StateReady_ExpectedResultLightTurnOn()
+        {
+            door.Open();
+            
+            light.Received(1).TurnOn();
+        }
+
+        [Test]
+        public void DoorOpened_StateSetTime_ExpectedResultDisplayCleared()
+        {
+            powerButton.Press();
+            timeButton.Press();
+            door.Open();
+
+            display.Received(1).Clear();
+        }
+
+
+
+        [Test]
+        public void DoorOpened_StateSetTime_ExpectedResultLightTurnOn()
+        {
+            powerButton.Press();
+            timeButton.Press();
+            door.Open();
+
+            light.Received(1).TurnOn();
+        }
+
+
+        [Test]
+        public void DoorOpened_StateCooking_ExpectedResultDisplayClear()
+        {
+            powerButton.Press();
+            timeButton.Press();
+            startCancelButton.Press();
+            door.Open();
+
+            display.Received(1).Clear();
+            
+        }
+
+        [Test]
+        public void DoorOpened_StateCooking_ExpectedResultCookingStop()
+        {
+            powerButton.Press();
+            timeButton.Press();
+            startCancelButton.Press();
+            door.Open();
+
+            cookController.Received(1).Stop();
+
+        }
+
+        [Test]
+        public void Doorclosed_StateDoorOpen_ExpectedResultLightTurnOff()
+        {
+            door.Open();
+            door.Close();
+
+            light.Received(1).TurnOff();
+
+        }
+
+
+        [Test]
+        public void Doorclosed_StateReady_ExpectedResultNoCall()
+        {
+            door.Close();
+
+            light.DidNotReceive().TurnOff();
+
+        }
+
+
+        [Test]
+        public void Doorclosed_StateReady_ExpectedResult2LightTurnOn()
+        {
+            door.Open();
+            door.Close();
+            door.Open();
+
+
+            light.Received(2).TurnOn();
+
+        }
+
     }
 }

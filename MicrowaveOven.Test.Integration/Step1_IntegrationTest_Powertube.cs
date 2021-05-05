@@ -66,6 +66,7 @@ namespace MicrowaveOven.Test.Integration
             Assert.That(stringWriter.ToString().ToLower().Contains("off"));
         }
 
+
         [Test]
         public void TurnOff_WasOff_ExpectedOutputInConsole_NoOutput()
         {
