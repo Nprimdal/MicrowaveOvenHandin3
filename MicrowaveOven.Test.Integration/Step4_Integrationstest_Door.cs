@@ -41,6 +41,7 @@ namespace MicrowaveOven.Test.Integration
         public void DoorOpened_StateSetPower_ExpectedResultDisplayCleared()
         {
             powerButton.Press();
+
             door.Open();
 
             display.Received(1).Clear();
@@ -50,6 +51,7 @@ namespace MicrowaveOven.Test.Integration
         public void DoorOpened_StateSetPower_ExpectedResultLightTurnOn()
         {
             powerButton.Press();
+
             door.Open();
 
             light.Received(1).TurnOn();
@@ -68,6 +70,7 @@ namespace MicrowaveOven.Test.Integration
         {
             powerButton.Press();
             timeButton.Press();
+
             door.Open();
 
             display.Received(1).Clear();
@@ -80,6 +83,7 @@ namespace MicrowaveOven.Test.Integration
         {
             powerButton.Press();
             timeButton.Press();
+
             door.Open();
 
             light.Received(1).TurnOn();
@@ -92,6 +96,7 @@ namespace MicrowaveOven.Test.Integration
             powerButton.Press();
             timeButton.Press();
             startCancelButton.Press();
+
             door.Open();
 
             display.Received(1).Clear();
@@ -104,6 +109,7 @@ namespace MicrowaveOven.Test.Integration
             powerButton.Press();
             timeButton.Press();
             startCancelButton.Press();
+
             door.Open();
 
             cookController.Received(1).Stop();
@@ -114,10 +120,10 @@ namespace MicrowaveOven.Test.Integration
         public void Doorclosed_StateDoorOpen_ExpectedResultLightTurnOff()
         {
             door.Open();
+
             door.Close();
 
             light.Received(1).TurnOff();
-
         }
 
 
@@ -136,11 +142,10 @@ namespace MicrowaveOven.Test.Integration
         {
             door.Open();
             door.Close();
+
             door.Open();
 
-
             light.Received(2).TurnOn();
-
         }
 
     }
